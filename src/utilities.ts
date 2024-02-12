@@ -19,7 +19,8 @@ export const getAllFiles = (folderPath: string): string[] => {
     const allFilesAndFolders = fs.readdirSync(folderPath);
 
     allFilesAndFolders.forEach((item) => {
-        const fullFilePath = path.join(folderPath, item);
+        const fullFilePath = path.join(folderPath, item).replaceAll("\\", "/");
+        // console.log(fullFilePath);
 
         if (fs.statSync(fullFilePath).isDirectory()) {
             response = response.concat(getAllFiles(fullFilePath));

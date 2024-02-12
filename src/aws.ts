@@ -11,20 +11,13 @@ const s3 = new S3({
 
 export const uploadFile = async (fileName: string, localFilePath: string) => {
     const fileContent = fs.readFileSync(localFilePath);
-    const response = s3
+    const response = await s3
         .upload({
             Body: fileContent,
             Bucket: "vercel-project-bucket",
             Key: fileName,
         })
         .promise();
+
     console.log(response);
 };
-
-/*
-id - ba26fa4a0e8e28c1b5307c54d94ebae0
-
-secret - 5e39d15245b05eb1148ddc1cfb22dcf57ce90a66db6acd9773dc319eb1c0fc74
-
-end-point - https://732f56d8ec1d69381f60cd9865ba8d62.r2.cloudflarestorage.com
-*/
